@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import Citas from "./components/citas";
 
-export default function App() {
+const App = () => {
+  const [citas, setCitas] = useState([
+    { id: "1", paciente: "Hook", propietario: "Juan", sintomas: "No Come" },
+    { id: "2", paciente: "Redux", propietario: "Pedro", sintomas: "No rie" },
+    { id: "3", paciente: "Native", propietario: "Pablo", sintomas: "No canta" },
+  ]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.contenedor}>
+      <Text style={styles.titulo}>Administrador de citas</Text>
+      <FlatList
+        data={citas}
+        renderItem={({ item }) => <Citas item={item} />}
+        keyExtractor={(cita) => cita.id}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  contenedor: {
+    backgroundColor: "#AA076B",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  titulo: {
+    color: "#FFF",
+    marginTop: 40,
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
+
+export default App;
